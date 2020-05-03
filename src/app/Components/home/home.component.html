@@ -1,0 +1,47 @@
+<div class="col-md-12">  
+  <h2> Users Details</h2>  
+  <div class="table-responsive table-container">  
+    <table class="table">  
+      <thead>  
+        <tr>  
+          <th>Id</th>  
+          <th>First name</th>  
+          <th>Last name</th>  
+          <th>userName</th>  
+          <th>Email</th>
+          <th>Confimed</th>
+          <th>phoneNumber</th>
+          <th></th>
+          <th></th>
+        </tr>  
+      </thead>  
+      <tbody>  
+        <tr *ngFor="let user of usersList">  
+          <td>{{user.id}}</td>  
+          <td>{{user.firstName}}</td>  
+          <td>{{user.lastName}}</td>  
+          <td>{{user.userName}}</td>  
+          <td>{{user.email}}</td>
+            
+          <!-- <td *ngIf="user.emailConfirmed; else elseConfirmed">  
+            <span class="glyphicon glyphicon-ok"></span>
+          </td>  
+          <ng-template #elseConfirmed>  
+            <span class="glyphicon glyphicon-remove"></span>
+          </ng-template> -->
+
+          <td>{{user.emailConfirmed}}</td>   
+          <td>{{user.phoneNumber}}</td>   
+
+          <td>  
+            <!-- <button (click)="editUser()" class="btn btn-info">Edit</button>   -->
+            <a routerLink="/edit/{{user.id}}" class="btn btn-info">Edit</a>            
+          </td>
+          <td>
+            <button class="btn btn-success" *ngIf="!user.emailConfirmed" (click)="sendConfirm(user.id)">Confirm</button>  
+          </td>  
+        </tr>  
+      </tbody>  
+    </table>  
+  </div>  
+</div>  

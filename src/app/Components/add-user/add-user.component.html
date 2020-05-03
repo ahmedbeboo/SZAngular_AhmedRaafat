@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="col-md-10">  
+    <h2 class="text-center">{{formlabel}}</h2>  
+    <form [formGroup]="addForm" novalidate class="form">  
+      
+      <!-- <div class="form-group">  
+        <label>User Id:</label>  
+        <input type="hidden" type="number" formControlName="id" placeholder="Id" name="id" class="form-control" id="id">  
+      </div>   -->
+    
+      <div class="form-group">  
+        <label>First Name:</label>  
+        <input formControlName="firstName" placeholder="First Name" name="firstName" class="form-control" id="firstName">  
+        
+        <div class="alert  alert-danger" *ngIf="addForm.get('firstName').hasError('required') && addForm.get('firstName').touched">  
+          First Name is required  
+        </div>
+      </div>  
+    
+      <div class="form-group">  
+        <label>Last Name:</label>  
+        <input formControlName="lastName" placeholder="Last Name" name="lastName" class="form-control" id="lastName">  
+          
+        <div class="alert  alert-danger" *ngIf="addForm.get('lastName').hasError('required') && addForm.get('lastName').touched">  
+          Last Name is required  
+        </div>
+      </div>  
+
+
+      <div class="form-group">  
+        <label>Username:</label>  
+        <input formControlName="userName" placeholder="Username" name="userName" class="form-control" id="userName">  
+          
+        <div class="alert  alert-danger" *ngIf="addForm.get('userName').hasError('required') && addForm.get('userName').touched">  
+          Username is required  
+        </div>
+      </div> 
+      
+
+      <div class="form-group">  
+        <label>Email:</label>  
+        <input formControlName="email" placeholder="Email" name="email" class="form-control" id="email">  
+        
+        <div class="alert  alert-danger" *ngIf="addForm.get('email').hasError('required') && addForm.get('email').touched">  
+          Email is required  
+        </div>
+        <div class="alert  alert-danger" *ngIf="addForm.get('email').hasError('pattern')">  
+          Email is invalid  
+        </div>
+
+      </div>  
+      <div class="form-group">  
+        <label>Phone Number:</label>  
+        <input formControlName="phoneNumber" placeholder="Phone" name="phoneNumber" class="form-control" id="phoneNumber">
+          
+        <div class="alert  alert-danger" *ngIf="addForm.get('phoneNumber').hasError('required') && addForm.get('phoneNumber').touched">  
+          Phone is required  
+        </div>
+        <div class="alert  alert-danger" *ngIf="addForm.get('phoneNumber').hasError('pattern')">  
+          Phone is invalid  
+        </div>
+      </div>  
+
+
+      <div class="form-group">  
+        <label>Password:</label>  
+        <input formControlName="password" placeholder="Password" name="password" type="password" class="form-control" id="password">
+        
+        <div class="alert  alert-danger" *ngIf="addForm.get('password').hasError('required') && addForm.get('password').touched">  
+          Password is required  
+        </div>
+
+        <div class="alert  alert-danger" *ngIf="addForm.get('password').hasError('minlength')">  
+          Password Must be more than 7 digits  
+        </div>
+      </div>  
+
+
+      <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="btnvisibility" (click)="onSubmit()">Save</button>  
+      <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="!btnvisibility" (click)="onUpdate()">Update</button>  
+      <button class="btn btn-danger" style="margin-left: 5px;" (click)="back()">Back To Main</button>
+      <!-- <p>Form value: {{ addForm.value | json }}</p>   -->
+    </form>  
+  </div>
+</div>
