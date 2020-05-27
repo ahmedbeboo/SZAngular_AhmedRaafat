@@ -1,5 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+import {
+  map,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  tap
+} from "rxjs/operators";
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +34,12 @@ export class ProfilesService {
       }))
     })
   }
+
+  public getAllUsers2(): Observable<any[]> 
+  { 
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
   getSpecificUserInfo(id){
     return new Promise((resolve,reject)=>{
       this.http.get(this.apiUrl+"/"+id).subscribe(response=>{

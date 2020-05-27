@@ -13,10 +13,17 @@ export class HomeComponent implements OnInit {
   constructor(private profileService: ProfilesService) { }
 
   ngOnInit() {
-    this.profileService.getAllUsers().then(res => {
-      this.usersList=res;
-    }).catch(error => {
-    })
+    // this.profileService.getAllUsers().then(res => {
+    //   this.usersList=res;
+    // }).catch(error => {
+    // });
+
+
+
+    this.profileService.getAllUsers2().subscribe(response => 
+    {
+        this.usersList = response;
+    });
 
   }
 
