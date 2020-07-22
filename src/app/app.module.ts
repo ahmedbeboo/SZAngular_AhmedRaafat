@@ -11,13 +11,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './Components/notfound/notfound.component';
+import { PersonalDiaryAddComponent } from './Components/personalDiary/personal-diary-add/personal-diary-add.component';
+import { ToDoComponent } from './Components/TODO/to-do/to-do.component';
 
 
 // routing
 const routes: Routes = [
   { path: 'home', component:HomeComponent },
   { path: 'add', component:AddUserComponent },
-  { path: 'edit/:id', component:AddUserComponent },
+  {path:'addDiary',component:PersonalDiaryAddComponent},
+  { path: 'editDiary/:id', component:PersonalDiaryAddComponent },
+  {path:'addToDo',component:ToDoComponent},
+  { path: 'editToDo/:id', component:ToDoComponent },
   { path: 'userInfo', component:UserInfoComponent },
   { path: '', redirectTo:'home', pathMatch:'full' },
   { path: '**', component:NotfoundComponent }
@@ -31,7 +36,9 @@ const routes: Routes = [
     HomeComponent,
     AddUserComponent,
     UserInfoComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    PersonalDiaryAddComponent,
+    ToDoComponent
   ],
   imports: [
     FormsModule,

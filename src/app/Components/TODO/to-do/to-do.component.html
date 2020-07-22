@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="col-md-10">  
+    <h2 class="text-center">{{formlabel}}</h2>  
+    <form [formGroup]="addForm" novalidate class="form">  
+      
+      <input formControlName="userId" type="hidden" name="userId" class="form-control" id="userId">  
+
+      <div class="form-group">  
+        <label>Text note:</label>  
+        <textarea formControlName="text" placeholder="Text" name="text" class="form-control" id="text" rows="6"></textarea>
+
+        
+        <div class="alert  alert-danger" *ngIf="addForm.get('text').hasError('required') && addForm.get('text').touched">  
+          Text note is required  
+        </div>
+      </div>  
+    
+      
+      <div class="form-group">  
+        <label>Date:</label>  
+        <input formControlName="createdDate" placeholder="Date" type="datetime-local" name="createdDate" class="form-control" id="createdDate">  
+          
+        <div class="alert  alert-danger" *ngIf="addForm.get('createdDate').hasError('required') && addForm.get('createdDate').touched">  
+          Date is required  
+        </div>
+      </div>
+       
+      <div class="form-group">  
+        <label>Picture:</label>  
+        <input class="form-control" type="file" (change)="onSelectFile($event)" >
+        <input formControlName="picturesUrl" type="hidden" name="picturesUrl" class="form-control" id="picturesUrl">  
+
+      </div>
+
+
+      <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="btnvisibility" (click)="onSubmit()">Save</button>  
+      <button class="btn btn-success" [disabled]='addForm.invalid' *ngIf="!btnvisibility" (click)="onUpdate()">Update</button>  
+      <button class="btn btn-danger" style="margin-left: 5px;" (click)="back()">Back To Main</button>
+      <!-- <p>Form value: {{ addForm.value | json }}</p>   -->
+    </form>  
+  </div>
+</div>

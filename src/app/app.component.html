@@ -2,13 +2,19 @@
   <div class="container-fluid">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a routerLink="home" class="nav-link" routerLinkActive="active">
-          Users Info
+        <a routerLink="home" class="nav-link" *ngIf="loggedIn" routerLinkActive="active">
+          Home
         </a>
       </li>
+      
       <li class="nav-item">
-        <a routerLink="add" class="nav-link">
-          Create User
+        <button class="nav-link" style="border: none;background-color: transparent; color: #007bff;" *ngIf="loggedIn" (click)="logout()">logout</button>         
+      </li> 
+
+      
+      <li class="nav-item">
+        <a routerLink="add" class="nav-link" *ngIf="!loggedIn">
+          Sign up / Login
         </a>
       </li> 
     </ul>
