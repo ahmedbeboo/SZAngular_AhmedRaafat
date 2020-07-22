@@ -19,7 +19,7 @@
       
       <div class="form-group">  
         <label>Date:</label>  
-        <input formControlName="createdDate" placeholder="Date" type="datetime-local" max="{{todayDate|date:'MM/dd/yyyy hh:mm a'}}" name="createdDate" class="form-control" id="createdDate">  
+        <input formControlName="createdDate" placeholder="Date" type="datetime-local" [max]="todayDate"  name="createdDate" class="form-control" id="createdDate">  
           
         <div class="alert  alert-danger" *ngIf="addForm.get('createdDate').hasError('required') && addForm.get('createdDate').touched">  
           Date is required  

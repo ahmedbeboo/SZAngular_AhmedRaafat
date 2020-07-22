@@ -12,6 +12,7 @@ import { FileUploadService } from 'src/app/Services/file-upload.service';
   styleUrls: ['./to-do.component.css']
 })
 export class ToDoComponent implements OnInit {
+  todayDate:any;
 
   fileToUpload: File = null;
   fName:any;
@@ -39,6 +40,12 @@ export class ToDoComponent implements OnInit {
     });
   }
   ngOnInit() {
+
+    let today = Date.now();
+    this.todayDate=new Date(today).getFullYear()+'-'+('0' + (new Date(today).getMonth() + 1)).slice(-2)+'-'+('0' + new Date(today).getDate()).slice(-2)+"T00:00";
+
+    console.log(this.todayDate);
+
     let item = localStorage.getItem('userId');
     this.addForm.controls['userId'].setValue(item);
 

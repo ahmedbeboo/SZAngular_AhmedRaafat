@@ -42,7 +42,10 @@ export class PersonalDiaryAddComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.todayDate = Date.now();
+    let today = Date.now();
+    this.todayDate=new Date(today).getFullYear()+'-'+('0' + (new Date(today).getMonth() + 1)).slice(-2)+'-'+('0' + new Date(today).getDate()).slice(-2)+"T00:00";
+
+    console.log(this.todayDate);
 
     let item = localStorage.getItem('userId');
     this.addForm.controls['userId'].setValue(item);
