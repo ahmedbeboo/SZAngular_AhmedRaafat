@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   public pageNumberDiary: number = 1;
   public CountDiary: number;
 
-  public itemsInPage:number=1;
+  public itemsInPage:number=12;
 
   todoList: any;
   diaryList: any;

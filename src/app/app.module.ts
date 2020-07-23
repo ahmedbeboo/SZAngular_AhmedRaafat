@@ -15,6 +15,8 @@ import { PersonalDiaryAddComponent } from './Components/personalDiary/personal-d
 import { ToDoComponent } from './Components/TODO/to-do/to-do.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
 
 // routing
 const routes: Routes = [
@@ -47,6 +49,8 @@ const routes: Routes = [
     HttpClientModule,
     NgxPaginationModule,
     BrowserModule,
+    BrowserAnimationsModule,
+    ToastModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule],
