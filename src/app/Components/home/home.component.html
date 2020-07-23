@@ -16,7 +16,7 @@
         </a>
 
         <diV class="row">
-            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of diaryList">
+            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of diaryList | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
                 <img class="card-img-top" style="height: 150px;" *ngIf="item.picturesUrl != null" src="{{imagesURL}}/{{item.picturesUrl}}" alt="Card image cap" />
                 <div class="card-body">
                     <p class="card-title text-center" style="border: 1px dashed black; border-radius:5px ; padding: 5px 0;">{{item.createdDate|  date:'MM/dd/yyyy hh:mm a'}}</p>
@@ -26,6 +26,12 @@
 
                 </div>
             </div>
+
+            <div class="col-md-12" style="margin: 10px 0;">
+                <pagination-controls (pageChange)="onPageChangeDiary($event)"></pagination-controls>
+            </div>
+
+
         </diV>
     </div>
     <div class="tab-pane" id="tabs-2" role="tabpanel">
@@ -34,7 +40,7 @@
         </a>
 
         <diV class="row">
-            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of todoList">
+            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of todoList | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
                 <img class="card-img-top" style="height: 150px;" *ngIf="item.picturesUrl != null" src="{{imagesURL}}/{{item.picturesUrl}}" alt="Card image cap" />
                 <div class="card-body">
                     <p class="card-title text-center" style="border: 1px dashed black; border-radius:5px ; padding: 5px 0;">{{item.createdDate|  date:'MM/dd/yyyy hh:mm a'}}</p>
@@ -44,6 +50,11 @@
 
                 </div>
             </div>
+
+            <div class="col-md-12" style="margin: 10px 0;">
+                <pagination-controls (pageChange)="onPageChangeToDo($event)"></pagination-controls>
+            </div>
+
         </diV>
 
     </div>

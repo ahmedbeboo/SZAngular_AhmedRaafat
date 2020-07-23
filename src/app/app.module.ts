@@ -13,6 +13,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NotfoundComponent } from './Components/notfound/notfound.component';
 import { PersonalDiaryAddComponent } from './Components/personalDiary/personal-diary-add/personal-diary-add.component';
 import { ToDoComponent } from './Components/TODO/to-do/to-do.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 // routing
@@ -44,6 +45,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     BrowserModule,
     RouterModule.forRoot(routes)
   ],

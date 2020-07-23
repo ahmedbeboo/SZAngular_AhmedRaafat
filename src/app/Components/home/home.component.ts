@@ -2,12 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ProfilesService } from 'src/app/Services/profiles.service';
 import { ItemService } from 'src/app/Services/item.service';
 
+import { PageResult } from 'src/app/Entities/PageResult';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  public pageNumber: number = 1;
+  public Count: number;
 
   todoList: any;
   diaryList: any;
@@ -16,11 +24,11 @@ export class HomeComponent implements OnInit {
   isDiary: true;
   isToDo: true;
 
-  imagesURL:any;
+  imagesURL: any;
 
-  constructor(private profileService: ProfilesService, private itemService: ItemService) { 
+  constructor(private http: HttpClient, private profileService: ProfilesService, private itemService: ItemService) {
 
-    this.imagesURL=itemService.itemPicturesUpload;
+    this.imagesURL = itemService.itemPicturesUpload;
   }
 
   ngOnInit() {
@@ -31,20 +39,33 @@ export class HomeComponent implements OnInit {
 
     let item = localStorage.getItem('userId');
 
-    this.itemService.getAllItems(item,true).then(res => {
-      this.diaryList = res;
-    }).catch(error => {
-    })
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + false).subscribe(result => {
+      this.todoList = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
 
-    this.itemService.getAllItems(item,false).then(res => {
-      this.todoList = res;
-    }).catch(error => {
-    })
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + true).subscribe(result => {
+      this.diaryList = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
 
 
-    this.profileService.getAllUsers2().subscribe(response => {
-      this.usersList = response;
-    });
+    // this.itemService.getAllItems(item,true).then(res => {
+    //   this.diaryList = res;
+    // }).catch(error => {
+    // })
+
+    // this.itemService.getAllItems(item,false).then(res => {
+    //   this.todoList = res;
+    // }).catch(error => {
+    // })
+
+
+    // this.profileService.getAllUsers2().subscribe(response => {
+    //   this.usersList = response;
+    // });
 
   }
 
@@ -57,4 +78,23 @@ export class HomeComponent implements OnInit {
   }
 
 
+  public onPageChangeToDo = (pageNumber) => {
+    let item = localStorage.getItem('userId');
+
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + false).subscribe(result => {
+      this.todoList = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
+  }
+
+  public onPageChangeDiary = (pageNumber) => {
+    let item = localStorage.getItem('userId');
+
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + true).subscribe(result => {
+      this.todoList = result.items;
+      this.pageNumber = result.pageIndex;
+      this.Count = result.count;
+    }, error => console.error(error));
+  }
 }

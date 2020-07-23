@@ -9,6 +9,7 @@ import {
   switchMap,
   tap
 } from "rxjs/operators";
+import { PageResult } from '../Entities/PageResult';
 
 
 
@@ -79,5 +80,8 @@ export class ItemService {
       return v.toString(16);
     });
   }
+
+
+
 
 }
