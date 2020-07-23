@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   public onPageChangeToDo = (pageNumber) => {
     let item = localStorage.getItem('userId');
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + false).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + false,{headers:this.options}).subscribe(result => {
       this.todoList = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
@@ -93,7 +93,7 @@ export class HomeComponent implements OnInit {
   public onPageChangeDiary = (pageNumber) => {
     let item = localStorage.getItem('userId');
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + true).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + true,{headers:this.options}).subscribe(result => {
       this.todoList = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
