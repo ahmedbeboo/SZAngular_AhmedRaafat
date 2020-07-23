@@ -26,8 +26,10 @@ export class HomeComponent implements OnInit {
 
   imagesURL: any;
 
-  constructor(private http: HttpClient, private profileService: ProfilesService, private itemService: ItemService) {
+  options: any;
 
+  constructor(private http: HttpClient, private profileService: ProfilesService, private itemService: ItemService) {
+    this.options = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8').set("Authorization", "Bearer " + localStorage.getItem("token"));
     this.imagesURL = itemService.itemPicturesUpload;
   }
 
@@ -39,13 +41,13 @@ export class HomeComponent implements OnInit {
 
     let item = localStorage.getItem('userId');
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + false).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + false,{headers:this.options}).subscribe(result => {
       this.todoList = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
     }, error => console.error(error));
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + true).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + true,{headers:this.options}).subscribe(result => {
       this.diaryList = result.items;
       this.pageNumber = result.pageIndex;
       this.Count = result.count;
