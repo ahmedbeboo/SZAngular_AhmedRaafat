@@ -86,6 +86,8 @@ export class AddUserComponent implements OnInit {
 
       localStorage.setItem ('token', this.userInfo.token);
       localStorage.setItem('userId',this.userInfo.id);
+      localStorage.setItem('userName',this.userInfo.firstName+" "+this.userInfo.lastName);
+
 
       this.navRoter.navigate(['/home']);
     }).catch(error => {
@@ -99,6 +101,8 @@ export class AddUserComponent implements OnInit {
       this.userInfo= res;
       localStorage.setItem ('token', this.userInfo.token);
       localStorage.setItem('userId',this.userInfo.id);
+      localStorage.setItem('userName',this.userInfo.firstName+" "+this.userInfo.lastName);
+
 
       this.navRoter.navigate(['/home']);
     }).catch(error => {

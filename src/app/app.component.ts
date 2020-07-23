@@ -12,27 +12,26 @@ import { ProfilesService } from './Services/profiles.service';
 export class AppComponent {
   title = 'Cornetelevated';
 
-  // loggedIn: boolean;
-
+  userName:any;
+  
   constructor(private profileService: ProfilesService, private navRoter: Router) {
 
     var sideBar=localStorage.getItem("token");
     if (sideBar !== 'undefined' && sideBar !== null) {
-      // this.loggedIn = true;
 
+      this.userName=localStorage.getItem("userName");
       this.navRoter.navigate(['/home']);
     }
     else{
       this.navRoter.navigate(['/add']);
     }
 
-    // this.profileService.loggedIn = this.loggedIn;
 
   }
 
   logout() {
-    // this.loggedIn = false;
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
+    localStorage.clear();
     this.navRoter.navigate(['/add']);
 
     this.profileService.loggedIn = false;
