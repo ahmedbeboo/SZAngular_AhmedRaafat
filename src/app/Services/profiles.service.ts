@@ -36,6 +36,17 @@ export class ProfilesService {
     })
   }
 
+
+  checkUserLogedIn(){
+    var sideBar=localStorage.getItem("token");
+    if (sideBar !== 'undefined' && sideBar !== null) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   public getAllUsers2(): Observable<any[]> 
   { 
     return this.http.get<any[]>(this.apiUrl);
