@@ -16,7 +16,7 @@
         </a>
 
         <diV class="row">
-            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of diaryList | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
+            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of diaryList | paginate: { itemsPerPage: itemsInPage, currentPage: pageNumberDiary, totalItems:CountDiary, id: 'first'  }">
                 <img class="card-img-top" style="height: 150px;" *ngIf="item.picturesUrl != null" src="{{imagesURL}}/{{item.picturesUrl}}" alt="Card image cap" />
                 <div class="card-body">
                     <p class="card-title text-center" style="border: 1px dashed black; border-radius:5px ; padding: 5px 0;">{{item.createdDate|  date:'MM/dd/yyyy hh:mm a'}}</p>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-md-12" style="margin: 10px 0;">
-                <pagination-controls (pageChange)="onPageChangeDiary($event)"></pagination-controls>
+                <pagination-controls id="first" (pageChange)="onPageChangeDiary($event)"></pagination-controls>
             </div>
 
 
@@ -40,7 +40,7 @@
         </a>
 
         <diV class="row">
-            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of todoList | paginate: { itemsPerPage: 12, currentPage: pageNumber, totalItems:Count }">
+            <div class="card col-md-4" style="padding: 0;" *ngFor="let item of todoList | paginate: { itemsPerPage: itemsInPage, currentPage: pageNumberToDo, totalItems:CountToDo, id: 'second'  }">
                 <img class="card-img-top" style="height: 150px;" *ngIf="item.picturesUrl != null" src="{{imagesURL}}/{{item.picturesUrl}}" alt="Card image cap" />
                 <div class="card-body">
                     <p class="card-title text-center" style="border: 1px dashed black; border-radius:5px ; padding: 5px 0;">{{item.createdDate|  date:'MM/dd/yyyy hh:mm a'}}</p>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-12" style="margin: 10px 0;">
-                <pagination-controls (pageChange)="onPageChangeToDo($event)"></pagination-controls>
+                <pagination-controls id="second" (pageChange)="onPageChangeToDo($event)"></pagination-controls>
             </div>
 
         </diV>

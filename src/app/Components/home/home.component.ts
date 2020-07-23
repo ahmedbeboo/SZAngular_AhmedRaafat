@@ -14,8 +14,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class HomeComponent implements OnInit {
 
-  public pageNumber: number = 1;
-  public Count: number;
+  public pageNumberToDo: number = 1;
+  public CountToDo: number;
+
+  public pageNumberDiary: number = 1;
+  public CountDiary: number;
+
+  public itemsInPage:number=1;
 
   todoList: any;
   diaryList: any;
@@ -41,16 +46,16 @@ export class HomeComponent implements OnInit {
 
     let item = localStorage.getItem('userId');
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + false,{headers:this.options}).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumberToDo + "/" + item + "/" + false,{headers:this.options}).subscribe(result => {
       this.todoList = result.items;
-      this.pageNumber = result.pageIndex;
-      this.Count = result.count;
+      this.pageNumberToDo = result.pageIndex;
+      this.CountToDo = result.count;
     }, error => console.error(error));
 
-    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumber + "/" + item + "/" + true,{headers:this.options}).subscribe(result => {
+    this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + this.pageNumberDiary + "/" + item + "/" + true,{headers:this.options}).subscribe(result => {
       this.diaryList = result.items;
-      this.pageNumber = result.pageIndex;
-      this.Count = result.count;
+      this.pageNumberDiary = result.pageIndex;
+      this.CountDiary = result.count;
     }, error => console.error(error));
 
 
@@ -85,8 +90,8 @@ export class HomeComponent implements OnInit {
 
     this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + false,{headers:this.options}).subscribe(result => {
       this.todoList = result.items;
-      this.pageNumber = result.pageIndex;
-      this.Count = result.count;
+      this.pageNumberToDo = result.pageIndex;
+      this.CountToDo = result.count;
     }, error => console.error(error));
   }
 
@@ -94,9 +99,9 @@ export class HomeComponent implements OnInit {
     let item = localStorage.getItem('userId');
 
     this.http.get<PageResult<any>>("http://localhost:52045/api/Item/GetAllPaging/" + pageNumber + "/" + item + "/" + true,{headers:this.options}).subscribe(result => {
-      this.todoList = result.items;
-      this.pageNumber = result.pageIndex;
-      this.Count = result.count;
+      this.diaryList = result.items;
+      this.pageNumberDiary = result.pageIndex;
+      this.CountDiary = result.count;
     }, error => console.error(error));
   }
 }
