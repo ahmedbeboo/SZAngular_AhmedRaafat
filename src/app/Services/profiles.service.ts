@@ -56,8 +56,10 @@ export class ProfilesService {
   addUser(userInfo){
     return new Promise((resolve,reject)=>{
       this.http.post(this.apiUrl,JSON.stringify(userInfo),this.options).subscribe(response=>{
+        this.loggedIn=true;
         resolve(response);
       },(error=>{
+        this.loggedIn=false;
         reject(error);
       }))
     })
@@ -66,8 +68,10 @@ export class ProfilesService {
   Login(loginModel){
     return new Promise((resolve,reject)=>{
       this.http.post(this.apiUrl+"/login",JSON.stringify(loginModel),this.options).subscribe(response=>{
+        this.loggedIn=true;
         resolve(response);
       },(error=>{
+        this.loggedIn=false;
         reject(error);
       }))
     })

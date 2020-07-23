@@ -24,7 +24,7 @@ export class FileUploadService {
 
   constructor(private http: HttpClient) {
     this.apiUrl = "http://localhost:52045/api/FileUpload";
-    this.options = { headers: new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8').set("Authorization", "Bearer " + localStorage.getItem("token")) };
+    this.options =  new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8').set("Authorization", "Bearer " + localStorage.getItem("token"));
   }
 
   public uploadFile=(newFileName,file)=>{
@@ -33,7 +33,7 @@ export class FileUploadService {
     formData.append('file',file,file.name);
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiUrl+"/"+newFileName, formData,{headers:this.options,reportProgress:true,observe:'events'}).subscribe(response => {
+      this.http.post(this.apiUrl+"/"+newFileName, formData,{reportProgress:true,observe:'events'}).subscribe(response => {
 
         if(response.type===HttpEventType.UploadProgress)
         {
